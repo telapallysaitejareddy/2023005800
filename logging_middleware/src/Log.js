@@ -1,13 +1,9 @@
 import axios from "axios";
-import { LOG_API } from "./constants";
 import { ACCESS_TOKEN } from "./auth";
-import { validateLog } from "./validator";
 
-export const Log = async (stack, level, pkg, message) => {
-  if (!validateLog(stack, level, pkg, message)) {
-    return;
-  }
+const LOG_API = "http://4.224.186.213/evaluation-service/logs";
 
+export async function Log(stack, level, pkg, message) {
   try {
     const response = await axios.post(
       LOG_API,
@@ -26,6 +22,6 @@ export const Log = async (stack, level, pkg, message) => {
 
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
-};
+}

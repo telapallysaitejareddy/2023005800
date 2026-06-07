@@ -11,6 +11,8 @@ function AllNotifications() {
   const [limit, setLimit] = useState(10);
 
   useEffect(() => {
+    Log("frontend", "info", "page", "All Notifications page loaded");
+
     const sampleNotifications = [
       {
         id: 1,
@@ -36,54 +38,6 @@ function AllNotifications() {
         type: "Event",
         timestamp: "2026-06-04T15:00:00",
       },
-      {
-        id: 5,
-        title: "Google Internship Drive",
-        type: "Placement",
-        timestamp: "2026-06-03T09:00:00",
-      },
-      {
-        id: 6,
-        title: "Hackathon Announcement",
-        type: "Event",
-        timestamp: "2026-06-02T12:00:00",
-      },
-      {
-        id: 7,
-        title: "Mid Examination Results",
-        type: "Result",
-        timestamp: "2026-06-01T10:00:00",
-      },
-      {
-        id: 8,
-        title: "Infosys Recruitment",
-        type: "Placement",
-        timestamp: "2026-05-30T09:00:00",
-      },
-      {
-        id: 9,
-        title: "Campus Fest",
-        type: "Event",
-        timestamp: "2026-05-29T18:00:00",
-      },
-      {
-        id: 10,
-        title: "Wipro Hiring Drive",
-        type: "Placement",
-        timestamp: "2026-05-28T10:00:00",
-      },
-      {
-        id: 11,
-        title: "Final Semester Results",
-        type: "Result",
-        timestamp: "2026-05-27T10:00:00",
-      },
-      {
-        id: 12,
-        title: "Coding Contest",
-        type: "Event",
-        timestamp: "2026-05-26T10:00:00",
-      },
     ];
 
     const viewed =
@@ -97,7 +51,7 @@ function AllNotifications() {
     setNotifications(preparedData);
     setLoading(false);
 
-    Log("frontend", "info", "notifications", "Notifications loaded");
+    Log("frontend", "info", "api", "Notifications loaded");
   }, []);
 
   useEffect(() => {
@@ -131,16 +85,16 @@ function AllNotifications() {
       localStorage.setItem("viewedNotifications", JSON.stringify(viewed));
     }
 
-    Log("frontend", "info", "notification", `Notification ${id} viewed`);
+    Log("frontend", "info", "component", `Notification ${id} viewed`);
   };
 
   if (loading) {
-    return <div className="loading">Loading...</div>;
+    return <h2>Loading...</h2>;
   }
 
   return (
     <div>
-      <h2 className="page-title">All Notifications</h2>
+      <h2>All Notifications</h2>
 
       <FilterBar
         typeFilter={typeFilter}

@@ -2,15 +2,16 @@ import { useEffect, useState } from "react";
 import NotificationList from "../components/NotificationList";
 import FilterBar from "../components/FilterBar";
 import { getTopNotifications } from "../services/priorityCalculator";
+import { Log } from "../middleware/logger";
 
 function PriorityInbox() {
   const [notifications, setNotifications] = useState([]);
-
   const [typeFilter, setTypeFilter] = useState("All");
-
   const [limit, setLimit] = useState(10);
 
   useEffect(() => {
+    Log("frontend", "info", "page", "Priority Inbox page loaded");
+
     const data = [
       {
         id: 1,
@@ -40,30 +41,11 @@ function PriorityInbox() {
         timestamp: "2026-06-04T15:00:00",
         viewed: false,
       },
-      {
-        id: 5,
-        title: "Google Internship Drive",
-        type: "Placement",
-        timestamp: "2026-06-03T09:00:00",
-        viewed: false,
-      },
-      {
-        id: 6,
-        title: "Hackathon Announcement",
-        type: "Event",
-        timestamp: "2026-06-02T12:00:00",
-        viewed: false,
-      },
-      {
-        id: 7,
-        title: "Mid Examination Results",
-        type: "Result",
-        timestamp: "2026-06-01T10:00:00",
-        viewed: false,
-      },
     ];
 
     setNotifications(data);
+
+    Log("frontend", "info", "api", "Priority notifications loaded");
   }, []);
 
   let topNotifications = getTopNotifications(notifications, limit);
@@ -76,7 +58,7 @@ function PriorityInbox() {
 
   return (
     <div>
-      <h2 className="page-title">Priority Inbox</h2>
+      <h2>Priority Inbox</h2>
 
       <FilterBar
         typeFilter={typeFilter}
